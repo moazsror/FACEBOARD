@@ -72,27 +72,11 @@ header{
   padding-right: 10px;
 }
 
-.left-button, .middle-button, .right-button{
-  background-color: rgb(255, 255, 255);
-  border-radius: 9px;
-  padding: 9px;
-  cursor: pointer;
-  border: none;  
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  transition: all 0.15s;
-}
-
 button:hover{
   background-color: rgb(30, 30, 30);
   color: white;
 }
 
-.right-button-clicked{
-  background-color: rgb(46, 204, 113); 
-  color: white;                        
-  font-weight: bold;                   
-}
 
 .join-button {
   border-radius: 10px;
@@ -151,11 +135,6 @@ body.light-mode {
   background-color: whitesmoke;
 }
 
-.light-mode .right-button-clicked{
-  background-color: rgb(46, 204, 113); 
-  color: white;                        
-  font-weight: bold;                   
-}
 
 .light-mode .join-button-clicked{
   background-color: rgb(0, 188, 3);
