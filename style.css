@@ -1,12 +1,32 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
-  background-color: rgb(165, 155, 155);
+  background-color:   #000000;
   margin: 0;
   padding: 0;
+  transition: 1s;
 }
 
+.dark-button{
+  color: white;
+  background-color: black;
+  border-radius: 30px;
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.5s;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.dark-button:hover{
+  background-color: white;
+  color: black;
+}
+
+
 .profile-description{
-  border: solid 1px black;
+  color: white;
+  border: solid 1px white;
   border-radius: 3px;
   padding: 7px;
   width: 100px;
@@ -14,11 +34,13 @@ body{
 
 main{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .profile-name{
+  color: white;
   margin-top: 5px;
   margin-bottom: 6px;
 }
@@ -61,12 +83,12 @@ header{
   transition: all 0.15s;
 }
 
-.left-button:hover, .middle-button:hover, .right-button:hover{
+button:hover{
   background-color: rgb(30, 30, 30);
   color: white;
 }
 
-.right-button-clicked , .right-button-clicked:hover{
+.right-button-clicked{
   background-color: rgb(46, 204, 113); 
   color: white;                        
   font-weight: bold;                   
@@ -76,12 +98,67 @@ header{
   border-radius: 10px;
   border: none;
   padding: 8px;
-  background-color: rgb(0, 0, 0);
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   cursor: pointer;
+  font-weight: bold;
+  transition: all 0.15s
 }
 
+
 .join-button-clicked{
-  background-color: rgba(145, 4, 4, 0.665);
+  background-color: rgb(0, 188, 3);
 }
+
+
+body.light-mode {
+  background-color: rgb(240, 240, 240);
+  transition: all 1s;
+}
+
+.light-mode .profile-name {
+  color: rgb(40, 40, 40);
+}
+
+.light-mode .profile-description {
+  color: rgb(0, 0, 0);
+  border-color: rgb(0, 0, 0);
+}
+
+.light-mode button{
+  color: white;
+  background-color: black;
+}
+
+.light-mode button:hover{
+  color: black;
+  background-color: white;
+}
+
+.light-mode .dark-button{
+  color: black;
+  background-color: white;
+  transition: all 0.5s;
+}
+
+
+.light-mode .dark-button:hover{
+  background-color:black;
+  color: white;
+}
+
+.light-mode header{
+  background-color: whitesmoke;
+}
+
+.light-mode .right-button-clicked{
+  background-color: rgb(46, 204, 113); 
+  color: white;                        
+  font-weight: bold;                   
+}
+
+.light-mode .join-button-clicked{
+  background-color: rgb(0, 188, 3);
+}
+
 
