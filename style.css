@@ -33,11 +33,13 @@ body{
 }
 
 main{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
   align-items: center;
   justify-content: center;
 }
+
 
 .profile-name{
   color: white;
@@ -78,7 +80,7 @@ button:hover{
 }
 
 
-.join-button {
+.add-button {
   border-radius: 10px;
   border: none;
   padding: 8px;
@@ -90,7 +92,7 @@ button:hover{
 }
 
 
-.join-button-clicked{
+.add-button-clicked{
   background-color: rgb(0, 188, 3);
 }
 
@@ -136,7 +138,7 @@ body.light-mode {
 }
 
 
-.light-mode .join-button-clicked{
+.light-mode .add-button-clicked{
   background-color: rgb(0, 188, 3);
 }
 
