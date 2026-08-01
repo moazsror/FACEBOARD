@@ -6,6 +6,32 @@ body{
   transition: 1s;
 }
 
+
+.user-form{
+  display: flex;
+} 
+
+input{
+  margin-right: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  border: none;
+}
+
+.create-button{
+  padding: 7px;
+  border-radius: 3px;
+  color: white;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.create-button:hover{
+  background-color: rgb(40, 40, 40);
+}
+
 .dark-button{
   color: white;
   background-color: black;
@@ -22,7 +48,6 @@ body{
   background-color: white;
   color: black;
 }
-
 
 .profile-description{
   color: white;
@@ -80,21 +105,7 @@ button:hover{
 }
 
 
-.add-button {
-  border-radius: 10px;
-  border: none;
-  padding: 8px;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.15s
-}
 
-
-.add-button-clicked{
-  background-color: rgb(0, 188, 3);
-}
 
 
 body.light-mode {
@@ -138,8 +149,14 @@ body.light-mode {
 }
 
 
-.light-mode .add-button-clicked{
-  background-color: rgb(0, 188, 3);
-}
 
+
+.light-mode .create-button{
+  color: black;
+  background-color: white;
+  border: none;
+}
+.light-mode .create-button:hover{
+  background-color: whitesmoke;
+}
 
