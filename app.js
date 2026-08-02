@@ -1,9 +1,8 @@
-// 1. Corrected imports pointing to Google's hosted web addresses
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
 import { getDatabase, ref, onValue, set, runTransaction } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
 
 
-// Your web app's Firebase configuration credentials
+
 const firebaseConfig = {
   apiKey: "AIzaSyBbAtPPqNvqML8xtldVusN9Qmf7Lb-wenI",
   authDomain: "profile-cards-17de5.firebaseapp.com",
@@ -15,27 +14,25 @@ const firebaseConfig = {
   measurementId: "G-G27M67CGB8"
 };
 
-// 2. Initialize the Firebase app and connect to your Realtime Database
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 
-// 3. Declare profileData dynamically so the entire app can access it
+
 let profileData = [];
 
-// 4. Listen to the cloud database path called 'profiles'
 onValue(ref(db, 'profiles'), (snapshot) => {
   const data = snapshot.val();
   
-  // If the cloud database has cards, use them. 
-  // Otherwise, use your 3 original default users as a backup!
+
   profileData = data || [ 
     {name: "Mark", description: "Mark is a successful influencer since the 80s", img: "images/pp.jpg" },               
     {name: "Sarah", description: "Sarah is a talented creative designer", img: "images/pp.jpg" },
     {name: "John", description: "John loves writing clean back-end code", img: "images/pp.jpg" }
   ];
 
-  // Draw the cards on screen using your function
+
   generateProfileHTML();
 });
 
@@ -69,19 +66,16 @@ function saveProfileDataToCloud(){
 
 
 if (!localStorage.getItem('isVisited')) {
-  // If not counted yet, tell Firebase to increase the score counter by 1 safely
   runTransaction(ref(db, 'visitorCount'), (currentCount) => {
     return (currentCount || 0) + 1;
   });
-  
-  // Set a local session tag marker so refreshing the browser won't spam counts
+
   localStorage.setItem('isVisited', 'true');
 }
 
-// 3. Listen to the cloud database path called 'visitorCount'
+
 onValue(ref(db, 'visitorCount'), (snapshot) => {
   const count = snapshot.val() || 0;
-  // Update the text box live across all users screens!
   visitorDisplay.textContent = ` Visitors so far: ${count}`;
 });
 
@@ -97,6 +91,8 @@ createUserBtn.addEventListener(('click'), ()=>{
   pageHead.insertAdjacentHTML('beforeend',  `<form id="userForm" class="user-form">
         <input id='nameInput' type="text" placeholder="Name">
         <input id='descInput' type="text" placeholder="Description">
+        <p class="upload-text">Upload image</p>
+        <input id='imgFileInput' class="image-input" type="file" placeholder="Upload a photo" accept="image/*">
         <button type="button" id="submitUserButton" class="create-button">Create Card</button>
       </form>`);
       const submitUserBtn = document.getElementById('submitUserButton');
@@ -105,18 +101,46 @@ createUserBtn.addEventListener(('click'), ()=>{
       submitUserBtn.addEventListener(('click'), ()=>{
         const nameIn = document.getElementById('nameInput').value;
         const descIn = document.getElementById('descInput').value;
-        if (nameIn != '' && descIn != ''){
-          profileData.push({name: nameIn, description: descIn, img: "images/pp.jpg"});
-          generateProfileHTML();
-          saveProfileDataToCloud();
+        const fileInput = document.getElementById('imgFileInput');
+        if (nameIn != '' && descIn != '')
+          {
+          if (fileInput.files.length > 0) {
+            const selectedFile = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+              const rawImage = new Image();
+              rawImage.src = reader.result;
+
+              rawImage.onload = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const MAX_WIDTH = 200;
+                const scaleSize = MAX_WIDTH / rawImage.width;
+                canvas.width = MAX_WIDTH;
+                canvas.height = rawImage.height * scaleSize;
+                ctx.drawImage(rawImage, 0, 0, canvas.width, canvas.height);
+                const optimizedBase64String = canvas.toDataURL('image/jpeg', 0.6);
+                profileData.push({ name: nameIn, description: descIn, img: optimizedBase64String });
+                
+                generateProfileHTML();
+                saveProfileDataToCloud();
+                userForm.remove();
+              };
+            };
+
+            reader.readAsDataURL(selectedFile);
+          } else {
+            profileData.push({ name: nameIn, description: descIn, img: "images/pp.jpg" });
+            generateProfileHTML();
+            saveProfileDataToCloud();
+            userForm.remove();
+          }
+        } else {
           userForm.remove();
         }
-        else {
-          generateProfileHTML();
-          userForm.remove();
-        }
-})
-})
+      });
+    });
 
 
 

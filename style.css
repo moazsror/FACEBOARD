@@ -9,13 +9,31 @@ body{
 
 .user-form{
   display: flex;
-} 
+  animation: slideDownForm 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0; 
+  transform: translateY(-20px); 
+}
+
+
+  @keyframes slideDownForm {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px); 
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0); 
+    }
+}
+
 
 input{
   margin-right: 5px;
   padding: 5px;
   border-radius: 3px;
   border: none;
+  background-color: black;
+  color: white;
 }
 
 .create-button{
@@ -97,9 +115,45 @@ main{
 
 .profile-picture{
   margin-top: 10px;
-  width: 50px;
-  border-radius: 100%;
+  width: 100px;          
+  height: 100px;         
+  object-fit: cover;    
+  border-radius: 50%; 
 }
+
+.website-name{
+  font-weight: bold;
+  color: white;
+  border: 1px solid white;
+  padding: 5px;
+  text-shadow: 1px 0.1px white;
+
+}
+
+.upload-text{
+  font-size: 11px;
+  margin-left: 10px;
+  margin-right: 3px;
+  color: white;
+}
+
+.image-input{
+  color: white;
+  margin-left: 10px;
+  background-color: black;
+}
+.image-input::file-selector-button{
+  color: white;
+  border: none;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+  background-color: rgb(26, 26, 26);
+}
+
 
 header{
   background: rgb(0, 0, 0);
@@ -178,5 +232,44 @@ body.light-mode {
   color: black;
   font-weight: bold; 
   font-size: 13px;
+}
+
+
+
+.light-mode .upload-text{
+  font-size: 11px;
+  margin-left: 10px;
+  margin-right: 3px;
+  color: black;
+}
+
+.light-mode .image-input{
+  color: black;
+  margin-left: 10px;
+  background-color: white;
+}
+.light-mode .image-input::file-selector-button{
+  color: black;
+  border: none;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+  background-color: rgb(250, 246, 246);
+}
+
+.light-mode input{
+  background-color: white;
+  color: black;
+}
+
+
+.light-mode .website-name{
+  color: black;
+  border: 1px solid black;
+  text-shadow: 1px 0.1px black;
+
 }
 
