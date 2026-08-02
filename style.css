@@ -1,0 +1,289 @@
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color:   #000000;
+  margin: 0;
+  padding: 0;
+  transition: 1s;
+}
+
+
+.user-form{
+  display: flex;
+  flex-direction: row;  
+  flex-wrap: wrap;       
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 15px;
+  animation: slideDownForm 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0; 
+  transform: translateY(-20px); 
+}
+
+
+  @keyframes slideDownForm {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px); 
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0); 
+    }
+}
+
+
+input{
+  margin-right: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  border: none;
+  background-color: black;
+  color: white;
+}
+
+.user-form input {
+  min-width: 150px;
+  flex: 1 1 auto;
+}
+
+.create-button{
+  padding: 7px;
+  border-radius: 3px;
+  color: white;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.create-button:hover{
+  background-color: rgb(40, 40, 40);
+}
+
+.dark-button{
+  color: white;
+  background-color: black;
+  border-radius: 30px;
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.5s;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.dark-button:hover{
+  background-color: white;
+  color: black;
+}
+
+.profile-description{
+  color: white;
+  border: solid 1px white;
+  border-radius: 3px;
+  padding: 7px;
+  width: 100px;
+}
+
+main{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.profile-name{
+  color: white;
+  margin-top: 5px;
+  margin-bottom: 6px;
+}
+
+.visitors-count{
+  color: white;
+  font-weight: bold; 
+  font-size: 13px;
+}
+
+
+.profile-card{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 30px;
+  height: 200px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.15);
+}
+
+.profile-picture{
+  margin-top: 10px;
+  width: 100px;          
+  height: 100px;         
+  object-fit: cover;    
+  border-radius: 50%; 
+}
+
+.website-name{
+  font-weight: bold;
+  color: white;
+  border: 1px solid white;
+  padding: 5px;
+  text-shadow: 1px 0.1px white;
+
+}
+
+.upload-text{
+  font-size: 11px;
+  margin-left: 10px;
+  margin-right: 3px;
+  color: white;
+}
+
+.image-input{
+  color: white;
+  margin-left: 10px;
+  background-color: black;
+}
+.image-input::file-selector-button{
+  color: white;
+  border: none;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+  background-color: rgb(26, 26, 26);
+}
+
+
+header{
+  background: rgb(0, 0, 0);
+  min-height: 50px;
+  height: auto;  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+button:hover{
+  background-color: rgb(30, 30, 30);
+  color: white;
+}
+
+
+
+
+
+body.light-mode {
+  background-color: rgb(240, 240, 240);
+  transition: all 1s;
+}
+
+.light-mode .profile-name {
+  color: rgb(40, 40, 40);
+}
+
+.light-mode .profile-description {
+  color: rgb(0, 0, 0);
+  border-color: rgb(0, 0, 0);
+}
+
+.light-mode button{
+  color: white;
+  background-color: black;
+}
+
+.light-mode button:hover{
+  color: black;
+  background-color: white;
+}
+
+.light-mode .dark-button{
+  color: black;
+  background-color: white;
+  transition: all 0.5s;
+}
+
+
+.light-mode .dark-button:hover{
+  background-color:black;
+  color: white;
+}
+
+.light-mode header{
+  background-color: whitesmoke;
+}
+
+.light-mode .profile-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.light-mode .create-button{
+  color: black;
+  background-color: white;
+  border: none;
+}
+.light-mode .create-button:hover{
+  background-color: whitesmoke;
+}
+
+.light-mode .visitors-count{
+  color: black;
+  font-weight: bold; 
+  font-size: 13px;
+}
+
+
+
+.light-mode .upload-text{
+  font-size: 11px;
+  margin-left: 10px;
+  margin-right: 3px;
+  color: black;
+}
+
+.light-mode .image-input{
+  color: black;
+  margin-left: 10px;
+  background-color: white;
+}
+.light-mode .image-input::file-selector-button{
+  color: black;
+  border: none;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+  background-color: rgb(250, 246, 246);
+}
+
+.light-mode input{
+  background-color: white;
+  color: black;
+}
+
+
+.light-mode .website-name{
+  color: black;
+  border: 1px solid black;
+  text-shadow: 1px 0.1px black;
+
+}
+
