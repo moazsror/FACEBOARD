@@ -66,7 +66,7 @@ function saveProfileDataToCloud(){
 
 
 if (!localStorage.getItem('isVisited')) {
-  alert("Welcome to FACEBOARD!\n\n" +
+  alert("NOTE: this website is not yet compatible with smartphones so please use a desktop or tablet for the best experience.\n\nWelcome to FACEBOARD!\n\n" +
     "This is a live community board where you can share who you are. This is our brand-new launch version—built to be clean, simple, and lightning fast.\n\n" +
     "When you add a card, it appears instantly on every user's screen around the world in real time.\n\n" +
     "Create your custom profile card and introduce yourself to the board today!");
