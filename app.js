@@ -2,7 +2,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebas
 import { getDatabase, ref, onValue, set, runTransaction } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
 
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyBbAtPPqNvqML8xtldVusN9Qmf7Lb-wenI",
   authDomain: "profile-cards-17de5.firebaseapp.com",
@@ -17,6 +16,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+
 
 
 
@@ -66,6 +66,10 @@ function saveProfileDataToCloud(){
 
 
 if (!localStorage.getItem('isVisited')) {
+  alert("Welcome to FACEBOARD!\n\n" +
+    "This is a live community board where you can share who you are. This is our brand-new launch version—built to be clean, simple, and lightning fast.\n\n" +
+    "When you add a card, it appears instantly on every user's screen around the world in real time.\n\n" +
+    "Create your custom profile card and introduce yourself to the board today!");
   runTransaction(ref(db, 'visitorCount'), (currentCount) => {
     return (currentCount || 0) + 1;
   });
