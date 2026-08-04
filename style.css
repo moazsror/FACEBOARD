@@ -6,6 +6,20 @@ body{
   transition: 1s;
 }
 
+.cancel-button{
+  padding: 7px;
+  border-radius: 3px;
+  color: black;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cancel-button:hover{
+  background-color: rgb(255, 0, 0);
+}
+
 
 .user-form{
   display: flex;
@@ -84,6 +98,8 @@ input{
   border-radius: 3px;
   padding: 7px;
   width: 100px;
+  overflow-wrap: break-word;
+  word-break: break-word; 
 }
 
 main{
@@ -287,3 +303,12 @@ body.light-mode {
 
 }
 
+
+.light-mode .cancel-button{
+  color: white;
+  background-color: black;
+}
+
+.light-mode .cancel-button:hover{
+  background-color: rgb(255, 0, 0);
+}

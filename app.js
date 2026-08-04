@@ -27,9 +27,9 @@ onValue(ref(db, 'profiles'), (snapshot) => {
   
 
   profileData = data || [ 
-    {name: "Mark", description: "Mark is a successful influencer since the 80s", img: "images/pp.jpg" },               
-    {name: "Sarah", description: "Sarah is a talented creative designer", img: "images/pp.jpg" },
-    {name: "John", description: "John loves writing clean back-end code", img: "images/pp.jpg" }
+    {name: "Mark", description: "Successful influencer", img: "images/pp.jpg" },               
+    {name: "Sarah", description: "Talented creative designer", img: "images/pp.jpg" },
+    {name: "John", description: "Writes clean backend code", img: "images/pp.jpg" }
   ];
 
 
@@ -49,19 +49,38 @@ const pageHead = document.getElementById('pageHeader');
 
 function generateProfileHTML(){
   profileSection.innerHTML = '';
-  profileData.forEach((profile,index)=>{
-    profileSection.innerHTML += `<article id="profileCard${index}" class="profile-card">
-        <img class="profile-picture" src="${profile.img}" alt="">
-        <h3 class="profile-name">${profile.name}</h3>
-        <p class="profile-description">${profile.description}</p>
+  
+  const totalCards = profileData.length;
+
+  profileData.slice().reverse().forEach((profile, index) => {
+    const originalIndex = totalCards - 1 - index;
+
+    profileSection.innerHTML += `<article id="profileCard${originalIndex}" class="profile-card">
+    <img 
+      class="profile-picture" 
+      src="${profile.img}" 
+      alt="${profile.name}'s profile picture" 
+      onerror="this.onerror=null; this.src='images/pp.jpg';"
+      >
+      <h3 class="profile-name">${profile.name}</h3>
+      <p class="profile-description">${profile.description}</p>
       </article>`;
 
-});
+  });
 }
 
 function saveProfileDataToCloud(){
-  set(ref(db,'profiles'),profileData)
+  const cleanedData = profileData.filter(profile => 
+    profile && 
+    profile.name && 
+    profile.name.trim() !== '' && 
+    profile.description && 
+    profile.description.trim() !== ''
+  );
+  
+  set(ref(db, 'profiles'), cleanedData);
 }
+
 
 
 
@@ -93,22 +112,36 @@ createUserBtn.addEventListener(('click'), ()=>{
   if (document.getElementById('userForm'))
      return;
   pageHead.insertAdjacentHTML('beforeend',  `<form id="userForm" class="user-form">
-        <input id='nameInput' type="text" placeholder="Name">
-        <input id='descInput' type="text" placeholder="Description">
-        <p class="upload-text">Upload image</p>
-        <input id='imgFileInput' class="image-input" type="file" placeholder="Upload a photo" accept="image/*">
-        <button type="button" id="submitUserButton" class="create-button">Create Card</button>
+      <input id='nameInput' type="text" placeholder="Name" maxlength="21">
+      <input id='descInput' type="text" placeholder="Description" maxlength="28">
+      <p class="upload-text">Upload image</p>
+      <input id='imgFileInput' class="image-input" type="file" placeholder="Upload a photo" accept="image/*">
+      <button type="button" id="submitUserButton" class="create-button">Create Card</button>
+      <button type="button" id="cancelButton" class="cancel-button">Cancel</button>
       </form>`);
       const submitUserBtn = document.getElementById('submitUserButton');
       const userForm = document.getElementById('userForm');
+      const cancelBtn = document.getElementById('cancelButton');
 
-      submitUserBtn.addEventListener(('click'), ()=>{
+      cancelBtn.addEventListener('click', () => {
+        userForm.remove();
+      });
+
+      submitUserBtn.addEventListener(('click'), () => {
         const nameIn = document.getElementById('nameInput').value;
         const descIn = document.getElementById('descInput').value;
         const fileInput = document.getElementById('imgFileInput');
-        if (nameIn != '' && descIn != '')
-          {
+        const nameRegex = /^[A-Za-z\s'-]+$/;
+        
+        const isValidName = nameIn && nameIn.trim() !== '' && nameIn.length >= 2 && nameIn.length <= 21 && nameRegex.test(nameIn);
+        const isValidDesc = descIn && descIn.trim() !== '' && descIn.length >= 10 && descIn.length <= 28;
+        
+        if (isValidName && isValidDesc) {
+          submitUserBtn.disabled = true;
+          submitUserBtn.textContent = "Processing...";
+
           if (fileInput.files.length > 0) {
+
             const selectedFile = fileInput.files[0];
             const reader = new FileReader();
 
@@ -141,7 +174,7 @@ createUserBtn.addEventListener(('click'), ()=>{
             userForm.remove();
           }
         } else {
-          userForm.remove();
+          alert("Name must be 2-21 characters (letters only). Description must be 10-28 characters. Both include spaces.");
         }
       });
     });
